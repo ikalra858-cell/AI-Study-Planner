@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Study Planner</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ===== HEADER ===== -->
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="header-badge">
+        <span class="badge-dot"></span>
+        Smart Study Assistant
+      </div>
+      <div class="logo">
+        <span class="logo-icon">🧠</span> AI Study Planner
+      </div>
+      <p class="tagline">Plan smarter. Study better.</p>
+    </div>
+  </header>
+
+  <!-- ===== MAIN CONTENT ===== -->
+  <main class="main-container">
+
+    <!-- INPUT CARD -->
+    <section class="card form-card" id="inputSection">
+      <h2 class="section-title">🎯 Create Your Study Plan</h2>
+      <p class="section-sub">Fill in the details below and we'll generate a personalised plan for you.</p>
+
+      <form id="planForm" novalidate>
+
+        <!-- Subject -->
+        <div class="form-group">
+          <label for="subject">📖 Subject Name</label>
+          <input type="text" id="subject" placeholder="e.g. Mathematics, Physics…" maxlength="60" autocomplete="off" />
+          <span class="error-msg" id="subjectError"></span>
+        </div>
+
+        <!-- Study hours -->
+        <div class="form-group">
+          <label for="hours">⏰ Available Study Time Per Day (hours)</label>
+          <input type="number" id="hours" placeholder="e.g. 2" min="0.5" max="16" step="0.5" />
+          <span class="error-msg" id="hoursError"></span>
+        </div>
+
+        <!-- Difficulty -->
+        <div class="form-group">
+          <label>🎚️ Difficulty Level</label>
+          <div class="difficulty-group">
+            <input type="radio" name="difficulty" id="easy" value="Easy" />
+            <label for="easy" class="radio-label easy">😊 Easy</label>
+
+            <input type="radio" name="difficulty" id="medium" value="Medium" />
+            <label for="medium" class="radio-label medium">🤔 Medium</label>
+
+            <input type="radio" name="difficulty" id="hard" value="Hard" />
+            <label for="hard" class="radio-label hard">🔥 Hard</label>
+          </div>
+          <span class="error-msg" id="difficultyError"></span>
+        </div>
+
+        <!-- Days remaining -->
+        <div class="form-group">
+          <label for="days">📅 Days Remaining Before Exam</label>
+          <input type="number" id="days" placeholder="e.g. 7" min="1" max="365" step="1" />
+          <span class="error-msg" id="daysError"></span>
+        </div>
+
+        <button type="submit" class="btn btn-primary" id="generateBtn">
+          <span class="spinner"></span>
+          <span class="btn-text">✨ Generate Study Plan</span>
+        </button>
+
+      </form>
+    </section>
+
+    <!-- OUTPUT SECTION (hidden until plan is generated) -->
+    <section id="outputSection" class="hidden">
+
+      <!-- Plan header -->
+      <div class="plan-header card">
+        <div>
+          <h2 id="planTitle" class="plan-title"></h2>
+          <p id="planSubtitle" class="plan-subtitle"></p>
+        </div>
+        <button class="btn btn-secondary" id="resetBtn">🔄 Reset Plan</button>
+      </div>
+
+      <!-- Today's Progress -->
+      <div class="card progress-card">
+        <div class="progress-header">
+          <h3 class="card-title">📊 Today's Progress</h3>
+          <div class="progress-stat">
+            <div class="progress-percent" id="progressPercent">0%</div>
+            <div class="progress-count" id="progressCount">0 / 0 sessions</div>
+          </div>
+        </div>
+        <!-- Hidden spans kept for JS compatibility -->
+        <div class="progress-meta" aria-hidden="true">
+          <span id="progressLabel">0% complete</span>
+          <span id="sessionsCompleted">0 / 0 sessions</span>
+        </div>
+        <div class="progress-bar-track">
+          <div class="progress-bar-fill" id="progressBar" style="width: 0%"></div>
+        </div>
+        <p class="progress-hint">☝️ Tap any session card to mark it complete.</p>
+      </div>
+
+      <!-- Daily Sessions -->
+      <h3 class="section-heading">📋 Your Daily Schedule</h3>
+      <div class="sessions-grid" id="sessionsGrid"></div>
+
+      <!-- Study Tips -->
+      <div class="card tips-card" id="tipsCard">
+        <h3 class="card-title">💡 Study Tips for You</h3>
+        <ul class="tips-list" id="tipsList"></ul>
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="site-footer">
+    <p>Built with HTML, CSS, JavaScript &amp; IBM Bob &nbsp;·&nbsp; No external services used</p>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
